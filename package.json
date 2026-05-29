@@ -1,0 +1,27 @@
+{
+  "name": "fireblocks-embedded-wallet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Real Fireblocks/Dynamic embedded-wallet demo (Meridian) on Polygon Amoy testnet.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@dynamic-labs/sdk-react-core": "^4.0.0",
+    "@dynamic-labs/ethereum": "^4.0.0",
+    "next": "^14.2.5",
+    "qrcode.react": "^4.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.4"
+  }
+}
