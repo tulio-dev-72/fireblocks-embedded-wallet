@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import Providers from "./providers";
 import "./globals.css";
 
@@ -36,6 +37,7 @@ export default function RootLayout({
         className={`${display.variable} ${body.variable} ${mono.variable}`}
       >
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
