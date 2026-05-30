@@ -9,6 +9,10 @@ import { isEthereumWallet } from "@dynamic-labs/ethereum";
 import { publicClient } from "./chains";
 import { ERC20_ABI, type TokenConfig } from "./tokens";
 
+// The exact wallet type Dynamic's guard expects (Wallet<WalletConnector>),
+// derived from the guard so we never drift from the SDK's own signature.
+export type DynamicWallet = Parameters<typeof isEthereumWallet>[0];
+
 // Read the on-chain balance for a token (native POL or ERC-20).
 export async function readBalance(
   token: TokenConfig,
@@ -31,7 +35,7 @@ export async function readBalance(
 // Send a token from the user's embedded wallet. The signing happens inside
 // Dynamic's MPC embedded wallet, this app never holds a private key.
 export async function sendToken(
-  wallet: unknown,
+  wallet: DynamicWallet | null,
   token: TokenConfig,
   to: Address,
   amount: string

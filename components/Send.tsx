@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { isAddress, type Address } from "viem";
 import { TOKENS } from "@/lib/tokens";
-import { sendToken } from "@/lib/wallet";
+import { sendToken, type DynamicWallet } from "@/lib/wallet";
 import { explorerTxUrl } from "@/lib/chains";
 
 type Status =
@@ -16,7 +16,7 @@ export default function Send({
   wallet,
   onBack,
 }: {
-  wallet: unknown;
+  wallet: DynamicWallet | null;
   onBack: () => void;
 }) {
   const sendable = TOKENS.filter((t) => !t.address || t.address.length > 0);
