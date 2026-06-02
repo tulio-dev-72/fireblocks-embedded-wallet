@@ -35,7 +35,15 @@ export default function RootLayout({
       <body
         className={`${display.variable} ${body.variable} ${mono.variable}`}
       >
-        <Providers>{children}</Providers>
+        <div className="device-stage">
+          <div className="device">
+            <div className="device-island" aria-hidden />
+            <div className="device-screen">
+              <Providers>{children}</Providers>
+            </div>
+            <div className="device-home" aria-hidden />
+          </div>
+        </div>
       </body>
     </html>
   );
