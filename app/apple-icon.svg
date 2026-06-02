@@ -1,0 +1,11 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="28" y1="16" x2="152" y2="164" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f4d595" />
+      <stop offset="1" stop-color="#e2b768" />
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="40" fill="url(#g)" />
+  <text x="50%" y="52%" dominant-baseline="central" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="112" font-weight="600" fill="#1a140a">M</text>
+</svg>
