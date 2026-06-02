@@ -10,8 +10,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@dynamic-labs/sdk-react-core": "^4.0.0",
     "@dynamic-labs/ethereum": "^4.0.0",
+    "@dynamic-labs/sdk-react-core": "^4.0.0",
+    "@vercel/analytics": "^2.0.1",
     "next": "^14.2.5",
     "qrcode.react": "^4.1.0",
     "react": "^18.3.1",
