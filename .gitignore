@@ -3,6 +3,10 @@ node_modules
 out
 .env.local
 .env*.local
+.secrets/
+fireblocks_secret.key
+*.key
+*.pem
 *.log
 .DS_Store
 next-env.d.ts
