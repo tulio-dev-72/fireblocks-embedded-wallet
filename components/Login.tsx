@@ -63,6 +63,22 @@ export default function Login() {
               the rest of the Fireblocks platform as the app scales.
             </span>
           </div>
+          <div className="compare-row">
+            <span className="compare-vs">vs. Fireblocks retail-demo (custodial)</span>
+            <span className="compare-text">
+              Fireblocks&rsquo; official{" "}
+              <a
+                href="https://github.com/fireblocks/retail-demo"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                retail-demo
+              </a>{" "}
+              shows the custodial omnibus pattern (backend holds the API key,
+              user balances pooled in vault accounts). This is the non-custodial
+              counterpart, the user holds the keys.
+            </span>
+          </div>
         </div>
       )}
 

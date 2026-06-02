@@ -98,6 +98,50 @@ lib/
   wallet.ts         readBalance() and sendToken() helpers
 ```
 
+## Reference architecture: how this relates to `fireblocks/retail-demo`
+
+Fireblocks publishes an official retail reference app,
+[`fireblocks/retail-demo`](https://github.com/fireblocks/retail-demo). It is the
+**custodial omnibus** pattern, and is deliberately *not* what this app is:
+
+| | `fireblocks/retail-demo` (official) | Meridian (this app) |
+| --- | --- | --- |
+| Custody model | **Custodial** — backend holds the Fireblocks API key + signer | **Non-custodial** — user's MPC embedded wallet holds the key |
+| Where funds live | Omnibus + withdrawal **vault accounts**, balances tracked per-user in MySQL | The user's own onchain wallet address |
+| Backend | Node/Express + MySQL, OAuth/JWT, webhook-driven DB updates | None — static Next.js client, no server secret |
+| Movement | TAP-governed vault→vault rebalancing + withdrawals to user OTAs | User signs their own transfers in-wallet |
+| Built on | Fireblocks core SDK (vaults, transactions, TAP, Automations) | Dynamic (a Fireblocks company) embedded wallets |
+
+Both are valid Fireblocks retail patterns; they sit at opposite ends of the
+custody spectrum. This app intentionally implements the **non-custodial** end,
+so a full architectural merge with the reference would defeat its purpose. The
+patterns that **do** carry over from the reference, and are reflected here:
+
+- **Testnet-only, no mainnet value.** The reference funds testnet vaults; this
+  app runs entirely on a public testnet (see currency note below).
+- **Withdrawals to a One-Time Address (OTA).** The reference releases funds to
+  user-supplied OTAs; the **Send** screen here is the same idea — an arbitrary
+  destination address, signed by the user's wallet.
+- **Supported-asset allowlist.** The reference keeps a `supportedAssets.json`;
+  the equivalent here is `lib/tokens.ts` (native + ERC-20 allowlist).
+- **No signing material in the frontend.** The reference keeps the signer on the
+  backend; this app keeps it in the user's MPC wallet. Neither puts a private
+  key in client code.
+
+### Testnet config currency (verified)
+
+- **Network:** Polygon Amoy, `chainId 80002`, native token **POL** — Polygon's
+  current testnet (Mumbai is deprecated). The reference's EVM testnet is
+  Ethereum Sepolia (`ETH_TEST5`); Amoy is used here as a current, valid EVM
+  testnet for the retail persona. Because this app talks to the chain RPC
+  directly via Dynamic + viem (no Fireblocks core asset IDs), the choice of EVM
+  testnet is independent of the Fireblocks asset catalog.
+- **RPC:** `https://rpc-amoy.polygon.technology` (override with
+  `NEXT_PUBLIC_AMOY_RPC_URL`).
+- **Explorer:** `https://amoy.polygonscan.com`. **Faucet:**
+  `https://faucet.polygon.technology` (select Amoy).
+- **SDK:** `@dynamic-labs/*` on the current v4 line.
+
 ## Notes for the portfolio story
 
 - This demonstrates the **consumer/retail custody persona**, distinct from the
@@ -108,6 +152,9 @@ lib/
 - The honest framing: non-custodial MPC, keys never touch the app server,
   signing happens in the wallet; that's the security story a Fireblocks
   audience cares about.
+- It is the **non-custodial counterpart** to Fireblocks' official
+  `fireblocks/retail-demo` (custodial omnibus) — a deliberate, articulated
+  architectural choice rather than an oversight.
 
 ## Security
 

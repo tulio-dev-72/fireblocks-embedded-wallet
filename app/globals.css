@@ -666,3 +666,5 @@ body {
   color: var(--iris-bright);
 }
 .compare-text { font-size: 13px; line-height: 1.45; color: var(--ivory-dim); }
+.compare-text a { color: var(--accent, #8a6cff); text-decoration: underline; text-underline-offset: 2px; }
+.compare-text a:hover { opacity: 0.85; }
